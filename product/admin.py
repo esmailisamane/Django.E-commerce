@@ -1,17 +1,24 @@
 from django.contrib import admin
 
 # Register your models here.
-from product.models import Category, Product
+from product.models import Category, Product, Images
 
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'parent', 'status']
     list_filter = ['status']
 
+class ProductImageInLine(admin.TabularInline):
+    model = Images
+    extra = 5
+
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['title', 'category', 'status']
     list_filter = ['category']
+    readonly_fields = ('image_tag',)
+    inlines = [ProductImageInLine]
 
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Images)
