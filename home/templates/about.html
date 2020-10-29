@@ -25,7 +25,13 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-                {{ setting.aboutus }}
+
+                {% for n in setting %}
+
+                    {{ n.aboutus | safe }}
+
+                {% endfor %}
+
                 hhh
 			</div>
 			<!-- /row -->
